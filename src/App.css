@@ -834,10 +834,208 @@
   color: var(--cyan);
 }
 
+/* Admin (hidden entry via triple-click ONLINE) */
+.sys-status-btn {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.5rem;
+}
+
+.sys-status-btn:hover,
+.sys-status-btn:focus-visible {
+  border-color: rgba(57, 255, 20, 0.35);
+  box-shadow: inset 0 0 12px rgba(57, 255, 20, 0.12);
+  outline: none;
+}
+
+.admin-page {
+  padding: 0.5rem 0 2rem;
+}
+
+.admin-page h1 {
+  color: var(--green);
+  text-shadow: var(--glow-green);
+  margin-bottom: 0.5rem;
+}
+
+.admin-muted {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.admin-login {
+  max-width: 420px;
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(57, 255, 20, 0.35);
+  background: rgba(8, 12, 10, 0.9);
+  box-shadow: var(--glow-green);
+}
+
+.admin-login label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--green);
+}
+
+.admin-login input,
+.stock-edit input,
+.admin-table select {
+  background: #07070f;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--text);
+  padding: 0.65rem 0.7rem;
+  font-family: var(--font-mono);
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.admin-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.admin-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.admin-metrics article {
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  background: rgba(10, 10, 18, 0.9);
+  padding: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.admin-metrics span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.admin-metrics strong {
+  font-family: var(--font-display);
+  color: var(--cyan);
+  font-size: 1.05rem;
+}
+
+.admin-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-panel {
+  border: 1px solid var(--border);
+  background: rgba(12, 12, 20, 0.8);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-panel h2 {
+  color: var(--magenta);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-panel ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.admin-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel-head h2 { margin-bottom: 0; }
+
+.admin-table-wrap {
+  overflow: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 0.45rem 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.admin-table th {
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.row-low td { color: #ffcc66; }
+.row-out td { color: #ff6b9d; }
+
+.stock-edit {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.stock-edit input {
+  width: 4.2rem;
+  padding: 0.3rem 0.4rem;
+}
+
+.stock-edit button,
+.admin-table select {
+  padding: 0.3rem 0.45rem;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--cyan);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.admin-error {
+  color: #ff4d7a;
+  font-family: var(--font-mono);
+  margin-top: 0.75rem;
+}
+
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
   .product-modal { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
-  .sys-status { display: none; }
+  .admin-grid-2 { grid-template-columns: 1fr; }
+  /* keep ONLINE light visible — secret admin entry */
+  .sys-status { display: inline-flex; }
 }

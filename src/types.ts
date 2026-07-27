@@ -21,7 +21,7 @@ export interface CartItem {
   quantity: number
 }
 
-export type Page = 'home' | 'shop' | 'about'
+export type Page = 'home' | 'shop' | 'about' | 'admin'
 
 export interface ChatMessage {
   id: string

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import './App.css'
 import { About } from './components/About'
+import { AdminPage } from './components/AdminPage'
 import { CartDrawer } from './components/CartDrawer'
 import { ChatBot } from './components/ChatBot'
 import { Footer } from './components/Footer'
@@ -50,15 +51,13 @@ function App() {
         cartCount={cart.count}
         onOpenCart={() => setCartOpen(true)}
         onOpenChat={() => setChatOpen(true)}
+        onSecretAdmin={() => navigate('admin')}
       />
 
       <main className="main-content">
         {page === 'home' && (
           <>
-            <Hero
-              onShop={() => navigate('shop')}
-              onChat={() => setChatOpen(true)}
-            />
+            <Hero onShop={() => navigate('shop')} onChat={() => setChatOpen(true)} />
             <ProductGrid
               title="LATEST DROPS"
               featuredOnly
@@ -85,14 +84,12 @@ function App() {
         )}
 
         {page === 'shop' && (
-          <ProductGrid
-            title="THE CATALOG"
-            highlightIds={highlightIds}
-            onSelect={openProduct}
-          />
+          <ProductGrid title="THE CATALOG" highlightIds={highlightIds} onSelect={openProduct} />
         )}
 
         {page === 'about' && <About onShop={() => navigate('shop')} />}
+
+        {page === 'admin' && <AdminPage onExit={() => navigate('home')} />}
       </main>
 
       <Footer />
@@ -107,12 +104,14 @@ function App() {
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} />
 
-      <ChatBot
-        open={chatOpen}
-        onToggle={() => setChatOpen((v) => !v)}
-        onHighlightProducts={handleHighlight}
-        onOpenProduct={openProductById}
-      />
+      {page !== 'admin' && (
+        <ChatBot
+          open={chatOpen}
+          onToggle={() => setChatOpen((v) => !v)}
+          onHighlightProducts={handleHighlight}
+          onOpenProduct={openProductById}
+        />
+      )}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import type { Plugin } from 'vite'
 import type { IncomingMessage, ServerResponse } from 'node:http'
+import { handleAdminApi } from './adminApi'
 import { runEchoChat, type ChatTurn } from './runEchoChat'
 
 function readBody(req: IncomingMessage): Promise<string> {
@@ -24,7 +25,14 @@ export function echoApiPlugin(): Plugin {
     name: 'axident-echo-api',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        if (!req.url?.startsWith('/api/echo')) return next()
+        const url = req.url || ''
+
+        if (url.startsWith('/api/admin')) {
+          const handled = await handleAdminApi(req, res)
+          if (handled) return
+        }
+
+        if (!url.startsWith('/api/echo')) return next()
 
         if (req.method === 'OPTIONS') {
           res.statusCode = 204
@@ -32,7 +40,7 @@ export function echoApiPlugin(): Plugin {
           return
         }
 
-        if (req.method === 'GET' && req.url.split('?')[0] === '/api/echo/health') {
+        if (req.method === 'GET' && url.split('?')[0] === '/api/echo/health') {
           sendJson(res, 200, {
             ok: true,
             live: Boolean(process.env.ANTHROPIC_API_KEY),
@@ -42,7 +50,7 @@ export function echoApiPlugin(): Plugin {
           return
         }
 
-        if (req.method !== 'POST' || req.url.split('?')[0] !== '/api/echo/chat') {
+        if (req.method !== 'POST' || url.split('?')[0] !== '/api/echo/chat') {
           sendJson(res, 404, { error: 'not found' })
           return
         }

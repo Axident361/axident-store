@@ -31,3 +31,11 @@ Without a key, the UI still loads; chat reports the missing uplink.
 - Vite + React + TypeScript
 - `@anthropic-ai/sdk` via Vite dev middleware (`/api/echo/*`)
 - Local cart (localStorage)
+
+## Admin dashboard
+
+Hidden entry: **triple-click the green ONLINE light** in the top nav.
+
+Default local password: `axident-chaos` (override with `ADMIN_PASSWORD`).
+
+Also set `ADMIN_SESSION_SECRET` in production.

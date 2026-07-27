@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import type { Page } from '../types'
 
 interface NavbarProps {
@@ -6,9 +7,33 @@ interface NavbarProps {
   cartCount: number
   onOpenCart: () => void
   onOpenChat: () => void
+  onSecretAdmin: () => void
 }
 
-export function Navbar({ page, onNavigate, cartCount, onOpenCart, onOpenChat }: NavbarProps) {
+export function Navbar({
+  page,
+  onNavigate,
+  cartCount,
+  onOpenCart,
+  onOpenChat,
+  onSecretAdmin,
+}: NavbarProps) {
+  const clicks = useRef(0)
+  const timer = useRef<number | null>(null)
+
+  const onStatusClick = () => {
+    clicks.current += 1
+    if (timer.current) window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => {
+      clicks.current = 0
+    }, 700)
+    if (clicks.current >= 3) {
+      clicks.current = 0
+      if (timer.current) window.clearTimeout(timer.current)
+      onSecretAdmin()
+    }
+  }
+
   return (
     <header className="navbar">
       <div className="navbar-inner">
@@ -45,10 +70,16 @@ export function Navbar({ page, onNavigate, cartCount, onOpenCart, onOpenChat }: 
         </nav>
 
         <div className="nav-actions">
-          <div className="sys-status" title="System status">
+          <button
+            type="button"
+            className="sys-status sys-status-btn"
+            title="System status"
+            onClick={onStatusClick}
+            aria-label="System online status"
+          >
             <span className="sys-dot" />
             ONLINE
-          </div>
+          </button>
           <button type="button" className="nav-chip" onClick={onOpenChat}>
             ECHO
           </button>
