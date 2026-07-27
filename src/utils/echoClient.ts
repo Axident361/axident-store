@@ -14,7 +14,7 @@ export async function sendEchoMessage(
   message: string,
   history: EchoHistoryTurn[],
 ): Promise<EchoChatResponse> {
-  const res = await fetch('/api/echo/chat', {
+  const res = await fetch('/api/echo?action=chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message, history }),
@@ -29,7 +29,7 @@ export async function sendEchoMessage(
 
 export async function pingEcho(): Promise<{ live: boolean }> {
   try {
-    const res = await fetch('/api/echo/health')
+    const res = await fetch('/api/echo?action=health')
     const data = (await res.json()) as { live?: boolean }
     return { live: Boolean(data.live) }
   } catch {

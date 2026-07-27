@@ -4,11 +4,8 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "functions": {
-    "api/**/*.ts": {
-      "includeFiles": "{api/lib/**,src/data/**,src/types.ts,src/server/**}"
+    "api/*.ts": {
+      "includeFiles": "{api/lib/**,src/data/**,src/types.ts}"
     }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
-  ]
+  }
 }

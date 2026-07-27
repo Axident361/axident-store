@@ -68,13 +68,13 @@ async function parseJson<T>(res: Response): Promise<T> {
 }
 
 export async function checkAdminSession(): Promise<boolean> {
-  const res = await fetch('/api/admin/session', { credentials: 'include' })
+  const res = await fetch('/api/admin?action=session', { credentials: 'include' })
   const data = await parseJson<{ authenticated?: boolean }>(res)
   return Boolean(data.authenticated)
 }
 
 export async function adminLogin(password: string): Promise<void> {
-  const res = await fetch('/api/admin/login', {
+  const res = await fetch('/api/admin?action=login', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -85,18 +85,18 @@ export async function adminLogin(password: string): Promise<void> {
 }
 
 export async function adminLogout(): Promise<void> {
-  await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' })
+  await fetch('/api/admin?action=logout', { method: 'POST', credentials: 'include' })
 }
 
 export async function fetchAdminDashboard(): Promise<AdminDashboardData> {
-  const res = await fetch('/api/admin/dashboard', { credentials: 'include' })
+  const res = await fetch('/api/admin?action=dashboard', { credentials: 'include' })
   const data = await parseJson<AdminDashboardData & { error?: string }>(res)
   if (!res.ok) throw new Error(data.error || 'Unauthorized')
   return data
 }
 
 export async function updateAdminOrder(orderId: string, status: string): Promise<void> {
-  const res = await fetch('/api/admin/orders', {
+  const res = await fetch('/api/admin?action=orders', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -112,7 +112,7 @@ export async function updateAdminStock(
   stock: number,
   reason = 'admin dashboard',
 ): Promise<void> {
-  const res = await fetch('/api/admin/stock', {
+  const res = await fetch('/api/admin?action=stock', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
