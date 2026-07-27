@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { clearSessionCookie } from '../../src/server/adminAuth'
+import { clearSessionCookie } from '../lib/adminAuth'
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store')

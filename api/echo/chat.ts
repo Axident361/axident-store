@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { runEchoChat, type ChatTurn } from '../../src/server/runEchoChat'
+import { runEchoChat, type ChatTurn } from '../lib/runEchoChat'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store')

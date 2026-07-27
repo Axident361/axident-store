@@ -4,7 +4,7 @@ import {
   getAdminPassword,
   passwordsMatch,
   sessionCookie,
-} from '../../src/server/adminAuth'
+} from '../lib/adminAuth'
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store')

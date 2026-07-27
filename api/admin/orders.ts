@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { isAuthedRequest } from '../../src/server/adminAuth'
-import { getStore } from '../../src/server/runEchoChat'
+import { isAuthedRequest } from '../lib/adminAuth'
+import { getStore } from '../lib/runEchoChat'
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store')
